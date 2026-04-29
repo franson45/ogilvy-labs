@@ -1172,6 +1172,140 @@
       text-wrap: pretty;
     }
 
+    /* ─── 06: Three Questions — italic display Qs with mono-numbered gutter, deliberately
+       distinct from the principles list (sec-how) so a reader doesn't conflate them. ─── */
+    .questions-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .question {
+      display: grid;
+      grid-template-columns: clamp(2.5rem, 4.5vw, 3.5rem) 1fr;
+      gap: clamp(0.85rem, 2vw, 1.75rem);
+      align-items: baseline;
+      padding: clamp(1.5rem, 3vw, 2.25rem) clamp(0.5rem, 1.5vw, 1rem);
+      border-bottom: 1px solid rgba(245, 240, 234, 0.1);
+      transition: background 0.3s ease;
+    }
+
+    .question:first-child {
+      border-top: 1px solid rgba(245, 240, 234, 0.1);
+    }
+
+    .question:hover {
+      background: rgba(235, 63, 67, 0.04);
+    }
+
+    .question:hover .question__num {
+      color: var(--red);
+    }
+
+    .question__num {
+      font-family: var(--font-mono);
+      font-size: clamp(0.8rem, 1vw, 0.95rem);
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      color: var(--dim);
+      transition: color 0.3s ease;
+      padding-top: 0.4em;
+    }
+
+    .question__text {
+      font-family: var(--font-body);
+      font-style: italic;
+      font-size: clamp(1.5rem, 2.6vw, 2.2rem);
+      line-height: 1.4;
+      color: var(--off-white);
+      text-wrap: pretty;
+    }
+
+    /* ─── 07: What's Next — quiet rotating ticker, one line at a time, crossfade ─── */
+    .next-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      position: relative;
+      min-height: clamp(7rem, 16vh, 11rem);
+      max-width: 36ch;
+    }
+
+    .next-item {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      font-family: var(--font-body);
+      font-style: italic;
+      font-size: clamp(1.7rem, 3vw, 2.6rem);
+      line-height: 1.35;
+      color: var(--off-white);
+      opacity: 0;
+      transform: translateY(0.6rem);
+      transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+      pointer-events: none;
+      text-wrap: balance;
+    }
+
+    .next-item.is-active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .next-list::after {
+      content: '';
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--red);
+      opacity: 0.5;
+      margin-top: clamp(1.5rem, 3vw, 2.5rem);
+    }
+
+    /* ─── 08: Get in Touch ─── */
+    .contact-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      max-width: 36rem;
+    }
+
+    .contact-item {
+      padding: clamp(1.25rem, 2vw, 1.75rem) 0;
+      border-bottom: 1px solid rgba(245, 240, 234, 0.12);
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .contact-item:first-child {
+      border-top: 1px solid rgba(245, 240, 234, 0.12);
+    }
+
+    .contact-item__name {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: clamp(1.3rem, 2vw, 1.7rem);
+      letter-spacing: -0.01em;
+      color: var(--off-white);
+    }
+
+    .contact-item__email {
+      font-family: var(--font-mono);
+      font-size: 0.92rem;
+      letter-spacing: 0.04em;
+      color: var(--red);
+      transition: opacity 0.2s ease;
+      align-self: flex-start;
+    }
+
+    .contact-item__email:hover {
+      opacity: 0.72;
+    }
+
     /* ─── 05: How We Work (Principles) ─── */
     .principles-list {
       display: flex;
@@ -1911,13 +2045,12 @@
       <div class="section__inner">
         <div class="section-label">07 — What's next</div>
         <h2 class="heading-lg" style="margin-bottom: var(--space-md);">What's&nbsp;next.</h2>
-        <!-- TODO (Claude Code): build this as a quiet rotating ticker. The five items below cycle one at a time, smooth crossfade or vertical scroll, ~4-5 second hold per item. Italic Instrument Serif at large display size. Treat as ambient — should reward attention but not demand it. Pause on hover. -->
-        <ul class="next-list" data-rotate="true" style="list-style: none; padding: 0; margin: 0; font-family: var(--font-body); font-style: italic; font-size: clamp(1.6rem, 3vw, 2.6rem); line-height: 1.4; max-width: 36ch;">
-          <li class="next-item" style="margin-bottom: 0.6em;">Audience intelligence as living&nbsp;data</li>
-          <li class="next-item" style="margin-bottom: 0.6em;">Strategy as&nbsp;simulation</li>
-          <li class="next-item" style="margin-bottom: 0.6em;">Diagnostic tools for&nbsp;strategists</li>
-          <li class="next-item" style="margin-bottom: 0.6em;">Configurable systems for live&nbsp;workshops</li>
-          <li class="next-item" style="margin-bottom: 0.6em;">Building alongside&nbsp;teams</li>
+        <ul class="next-list" data-rotate="true" aria-label="What's next, rotating">
+          <li class="next-item">Audience intelligence as living&nbsp;data</li>
+          <li class="next-item">Strategy as&nbsp;simulation</li>
+          <li class="next-item">Diagnostic tools for&nbsp;strategists</li>
+          <li class="next-item">Configurable systems for live&nbsp;workshops</li>
+          <li class="next-item">Building alongside&nbsp;teams</li>
         </ul>
       </div>
     </section>
@@ -1928,15 +2061,14 @@
         <div class="section-label">08 — Get in touch</div>
         <h2 class="heading-lg" style="margin-bottom: var(--space-md);">Get in&nbsp;touch.</h2>
         <p class="prose" style="max-width: 56ch; margin-bottom: var(--space-md);">If you've got a moment of friction worth solving or a tool here you want to understand better&mdash;we'd like to hear about&nbsp;it.</p>
-        <!-- TODO (Claude Code): style the contact list — name in display type, email in mono, generous spacing between rows. -->
-        <ul class="contact-list" style="list-style: none; padding: 0; margin: 0;">
-          <li class="contact-item" style="padding: clamp(1rem, 1.5vw, 1.25rem) 0; border-bottom: 1px solid var(--rule);">
-            <div style="font-family: var(--font-display); font-weight: 600; font-size: clamp(1.2rem, 1.8vw, 1.5rem);">Frances Hanson</div>
-            <a href="mailto:frances.hanson@ogilvy.com" style="font-family: var(--font-mono); font-size: 0.95rem; color: var(--red); text-decoration: none;">frances.hanson@ogilvy.com</a>
+        <ul class="contact-list">
+          <li class="contact-item">
+            <div class="contact-item__name">Frances Hanson</div>
+            <a class="contact-item__email" href="mailto:frances.hanson@ogilvy.com">frances.hanson@ogilvy.com</a>
           </li>
-          <li class="contact-item" style="padding: clamp(1rem, 1.5vw, 1.25rem) 0; border-bottom: 1px solid var(--rule);">
-            <div style="font-family: var(--font-display); font-weight: 600; font-size: clamp(1.2rem, 1.8vw, 1.5rem);">Bidnam Lee</div>
-            <a href="mailto:bidnam.lee@ogilvy.com" style="font-family: var(--font-mono); font-size: 0.95rem; color: var(--red); text-decoration: none;">bidnam.lee@ogilvy.com</a>
+          <li class="contact-item">
+            <div class="contact-item__name">Bidnam Lee</div>
+            <a class="contact-item__email" href="mailto:bidnam.lee@ogilvy.com">bidnam.lee@ogilvy.com</a>
           </li>
         </ul>
       </div>
@@ -2489,6 +2621,30 @@
         renderDetail();
       }
     });
+
+    // ─── 'What's next' rotating ticker ───
+    // Crossfades one item at a time, ~4.5s hold, pauses on hover so a reader who
+    // looks closer can finish the line they're on without it changing under them.
+    (() => {
+      const list = document.querySelector('.next-list[data-rotate="true"]');
+      if (!list) return;
+      const items = Array.from(list.querySelectorAll('.next-item'));
+      if (items.length < 2) {
+        items.forEach(el => el.classList.add('is-active'));
+        return;
+      }
+      let idx = 0;
+      let paused = false;
+      items[0].classList.add('is-active');
+      setInterval(() => {
+        if (paused) return;
+        items[idx].classList.remove('is-active');
+        idx = (idx + 1) % items.length;
+        items[idx].classList.add('is-active');
+      }, 4500);
+      list.addEventListener('mouseenter', () => { paused = true; });
+      list.addEventListener('mouseleave', () => { paused = false; });
+    })();
 
     // ─── Resize ───
     function onResize() {
