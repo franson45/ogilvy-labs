@@ -271,10 +271,12 @@
       font-family: var(--font-display);
       font-weight: 700;
       font-size: 0.7rem;
+      line-height: 1;
       letter-spacing: 0.08em;
       color: var(--ink);
       text-transform: uppercase;
       transition: color 0.4s ease;
+      white-space: nowrap;
     }
 
     .sticky-header.dark .sticky-header__text { color: #F5F0EA; }
@@ -388,7 +390,7 @@
     }
 
     .sticky-header.dark .nav-item.active {
-      background: rgba(255, 106, 0, 0.12);
+      background: rgba(235, 63, 67, 0.14);
     }
 
     .sticky-header.dark .nav-item.active .nav-item__label {
@@ -443,13 +445,14 @@
     .hero-title {
       font-family: var(--font-display);
       font-weight: 700;
-      font-size: clamp(5rem, 14vw, 16rem);
+      font-size: clamp(3rem, 9vw, 11rem);
       line-height: 0.85;
       text-transform: uppercase;
       letter-spacing: -0.04em;
       color: var(--ink);
       text-align: center;
       opacity: 0;
+      white-space: nowrap;
     }
 
     .hero-title.revealed { opacity: 1; }
@@ -493,7 +496,7 @@
 
     .letter-gap {
       display: inline-block;
-      width: clamp(2.5rem, 12vw, 12rem);
+      width: clamp(1.25rem, 4vw, 3.5rem);
     }
 
     /* ─══════════════════════════════════════════
@@ -611,8 +614,18 @@
       color: var(--ink);
     }
 
-    .section--dark .prose { color: var(--dim); }
-    .section--dark .prose em { color: var(--off-white); }
+    /* Dark-section readability: warm light primary, dim only for tertiary labels */
+    .section--dark .prose { color: var(--off-white); }
+    .section--dark .prose em { color: var(--white); }
+    .section--dark .shift-statement { color: var(--off-white); }
+    .section--dark .principle__title { color: var(--off-white); }
+    .section--dark .principle__body { color: var(--off-white); opacity: 0.78; }
+    .section--dark .tier-name { color: var(--off-white); }
+    .section--dark .detail-description,
+    .section--dark .detail-section-body { color: var(--off-white); opacity: 0.78; }
+    .section--dark .detail-vector-label,
+    .section--dark .detail-vector-value,
+    .section--dark .detail-section-label { color: var(--dim); }
 
     .prose-wide {
       max-width: 100%;
@@ -757,11 +770,11 @@
     }
 
     .tier-band:hover {
-      border-color: var(--graphite);
+      border-color: rgba(245, 240, 234, 0.4);
     }
 
     .tier-band.selected {
-      border-color: var(--graphite);
+      border-color: var(--red);
     }
 
     .tier-number {
@@ -2154,20 +2167,23 @@
       }
     ];
 
+    // Graduated red ramp tuned for dark section background.
+    // Lower tiers read as soft pinks/corals; top tier is the full Ogilvy red.
     const TIER_COLORS = {
-      0: '#C8A882', 1: '#CCA06E', 2: '#D4924E',
-      3: '#DC8236', 4: '#E8721E', 5: '#EB3F43'
+      0: '#F5C5C7', 1: '#EE9DA0', 2: '#E97478',
+      3: '#EE5E62', 4: '#EB3F43', 5: '#C8353A'
     };
 
     let selectedTier = null;
 
+    // Selected-state band background — dark warm tones with red tint.
     const TIER_BG = {
-      0: '#F5F0EA', 1: '#EDE7DD', 2: '#E8DFD2',
-      3: '#E3D7C8', 4: '#DDCFBE', 5: '#F0E4D4'
+      0: '#241B1C', 1: '#2A1D20', 2: '#311E23',
+      3: '#372025', 4: '#3D2127', 5: '#43222A'
     };
     const TIER_NUM_COLORS = {
-      0: '#C8A882', 1: '#BF9A6E', 2: '#B08A55',
-      3: '#A67A3D', 4: '#D07020', 5: '#EB3F43'
+      0: '#F5C5C7', 1: '#EE9DA0', 2: '#E97478',
+      3: '#EE5E62', 4: '#EB3F43', 5: '#C8353A'
     };
 
     function renderTierList() {
@@ -2371,7 +2387,7 @@
       const heroTitle = document.getElementById('heroTitle');
       const heroSub = document.getElementById('heroSub');
       // Build letter-by-letter markup
-      const text = ['O', 'C', null, 'L', 'a', 'b', 's'];
+      const text = ['O', 'g', 'i', 'l', 'v', 'y', null, 'L', 'a', 'b', 's'];
       text.forEach(ch => {
         if (ch === null) {
           const gap = document.createElement('span');
@@ -2391,12 +2407,18 @@
       const letters = heroTitle.querySelectorAll('.letter');
 
       const letterConfig = [
-        { delay: 0,   dur: 0.8, ease: 'cubic-bezier(0.22, 1, 0.36, 1)' },
-        { delay: 60,  dur: 0.8, ease: 'cubic-bezier(0.22, 1, 0.36, 1)' },
-        { delay: 350, dur: 0.6, ease: 'cubic-bezier(0.16, 1, 0.3, 1)' },
-        { delay: 410, dur: 0.5, ease: 'cubic-bezier(0.16, 1, 0.3, 1)' },
-        { delay: 455, dur: 0.45, ease: 'cubic-bezier(0.16, 1, 0.3, 1)' },
-        { delay: 490, dur: 0.4, ease: 'cubic-bezier(0.16, 1, 0.3, 1)' },
+        // OGILVY — first six letters cascade in
+        { delay: 0,   dur: 0.8,  ease: 'cubic-bezier(0.22, 1, 0.36, 1)' },
+        { delay: 60,  dur: 0.75, ease: 'cubic-bezier(0.22, 1, 0.36, 1)' },
+        { delay: 110, dur: 0.7,  ease: 'cubic-bezier(0.22, 1, 0.36, 1)' },
+        { delay: 155, dur: 0.65, ease: 'cubic-bezier(0.22, 1, 0.36, 1)' },
+        { delay: 195, dur: 0.6,  ease: 'cubic-bezier(0.22, 1, 0.36, 1)' },
+        { delay: 230, dur: 0.55, ease: 'cubic-bezier(0.22, 1, 0.36, 1)' },
+        // LABS — pause, then second word cascades
+        { delay: 480, dur: 0.6,  ease: 'cubic-bezier(0.16, 1, 0.3, 1)' },
+        { delay: 540, dur: 0.5,  ease: 'cubic-bezier(0.16, 1, 0.3, 1)' },
+        { delay: 590, dur: 0.45, ease: 'cubic-bezier(0.16, 1, 0.3, 1)' },
+        { delay: 635, dur: 0.4,  ease: 'cubic-bezier(0.16, 1, 0.3, 1)' },
       ];
 
       // Phase 1: Fade content, flood orange
