@@ -726,7 +726,162 @@
       color: var(--orange);
     }
 
-    /* ─── 02: What We've Built — editorial lead-in line between Basecamp and secondary tools ─── */
+    /* ─── 02: What We've Built ─── */
+    .built-intro {
+      margin-top: var(--space-sm);
+      max-width: 56ch;
+    }
+
+    .built-featured {
+      margin-top: var(--space-lg);
+    }
+
+    .built-featured__label,
+    .testimonials__label {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: var(--space-sm);
+    }
+
+    .built-featured__heading {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: clamp(1.85rem, 3.2vw, 3rem);
+      line-height: 1.08;
+      letter-spacing: -0.02em;
+      color: var(--off-white);
+      max-width: 22ch;
+      text-wrap: balance;
+    }
+
+    .built-featured__intro {
+      margin-top: var(--space-sm);
+      max-width: 54ch;
+    }
+
+    .built-featured__demos {
+      margin-top: var(--space-md);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(1.25rem, 2.2vw, 2rem);
+    }
+
+    @media (max-width: 720px) {
+      .built-featured__demos { grid-template-columns: 1fr; }
+    }
+
+    .built-card {
+      display: flex;
+      flex-direction: column;
+      text-decoration: none;
+      color: inherit;
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+                  border-color 0.3s ease,
+                  background 0.3s ease;
+    }
+
+    .built-card--featured {
+      padding: clamp(1.75rem, 2.8vw, 2.5rem);
+      border: 1px solid rgba(245, 240, 234, 0.12);
+      background: rgba(245, 240, 234, 0.015);
+      border-radius: 4px;
+    }
+
+    .built-card--featured:hover {
+      border-color: var(--red);
+      background: rgba(235, 63, 67, 0.05);
+      transform: translateY(-2px);
+    }
+
+    .built-card__eyebrow {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--dim);
+    }
+
+    .built-card__title {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: clamp(1.25rem, 1.8vw, 1.55rem);
+      line-height: 1.15;
+      letter-spacing: -0.01em;
+      margin-top: 0.6rem;
+      color: var(--off-white);
+    }
+
+    .built-card__body {
+      font-family: var(--font-body);
+      font-size: clamp(1.05rem, 1.15vw, 1.18rem);
+      line-height: 1.55;
+      margin-top: 0.85rem;
+      color: var(--off-white);
+      opacity: 0.78;
+      max-width: 44ch;
+      text-wrap: pretty;
+    }
+
+    .built-card__cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      margin-top: auto;
+      padding-top: 1.15rem;
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      letter-spacing: 0.05em;
+      color: var(--red);
+      transition: gap 0.25s ease;
+    }
+
+    .built-card:hover .built-card__cta {
+      gap: 0.7rem;
+    }
+
+    /* From-the-room testimonials — italic display quote, mono red attribution, thin red rules */
+    .testimonials {
+      margin-top: clamp(5rem, 9vw, 8rem);
+      max-width: 62ch;
+    }
+
+    .testimonial {
+      margin: 0;
+      padding: clamp(1.5rem, 3vw, 2.25rem) 0;
+      border-top: 1px solid rgba(235, 63, 67, 0.35);
+    }
+
+    .testimonial:last-child {
+      border-bottom: 1px solid rgba(235, 63, 67, 0.35);
+    }
+
+    .testimonial__quote {
+      font-family: var(--font-body);
+      font-style: italic;
+      font-size: clamp(1.5rem, 2.4vw, 2.1rem);
+      line-height: 1.4;
+      color: var(--off-white);
+      margin: 0;
+      text-wrap: pretty;
+    }
+
+    .testimonial__attribution {
+      margin-top: 1rem;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .testimonial__role { color: var(--red); }
+    .testimonial__company { color: var(--dim); margin-left: 0.6rem; }
+
+    /* Lead-in line between Basecamp/testimonials and the secondary tools row */
     .built-leadin {
       font-family: var(--font-body);
       font-style: italic;
@@ -734,9 +889,48 @@
       line-height: 1.35;
       color: var(--off-white);
       max-width: 26ch;
-      margin: clamp(4rem, 7vw, 6.5rem) auto;
+      margin: clamp(4.5rem, 8vw, 7rem) auto;
       text-align: center;
       text-wrap: balance;
+    }
+
+    /* Secondary tools row — visually subordinate to Basecamp */
+    .built-secondary {
+      margin-top: var(--space-md);
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: clamp(0.85rem, 1.5vw, 1.5rem);
+    }
+
+    @media (max-width: 720px) {
+      .built-secondary { grid-template-columns: 1fr; }
+    }
+
+    .built-card--secondary {
+      padding: clamp(1.1rem, 1.8vw, 1.4rem);
+      border: 1px solid rgba(245, 240, 234, 0.1);
+      border-radius: 4px;
+    }
+
+    .built-card--secondary:hover {
+      border-color: rgba(235, 63, 67, 0.6);
+      background: rgba(235, 63, 67, 0.03);
+    }
+
+    .built-card--secondary .built-card__title {
+      font-size: 1.1rem;
+      margin-top: 0;
+    }
+
+    .built-card--secondary .built-card__body {
+      font-size: 0.98rem;
+      line-height: 1.5;
+      margin-top: 0.5rem;
+    }
+
+    .built-card--secondary .built-card__cta {
+      padding-top: 0.85rem;
+      font-size: 0.7rem;
     }
 
     /* ─── 03: What We Build (Taxonomy) ─── */
@@ -1535,55 +1729,52 @@
     <section class="section section--dark" id="sec-built" data-bg-number="02">
       <div class="section__inner">
         <div class="section-label">02 — What we've built</div>
-        <h2 class="heading-lg" style="margin-bottom: var(--space-sm);">A few tools, in different stages of&nbsp;maturity.</h2>
-        <p class="prose" style="margin-top: var(--space-sm); max-width: 56ch;">The two Basecamp demos below have been scrubbed of client data&mdash;what you're walking through is the system, not the actual&nbsp;ideas.</p>
+        <h2 class="heading-lg">A few tools, in different stages of&nbsp;maturity.</h2>
+        <p class="prose built-intro">The two Basecamp demos below have been scrubbed of client data&mdash;what you're walking through is the system, not the actual&nbsp;ideas.</p>
 
         <!-- ─── BASECAMP — featured ─── -->
-        <!-- TODO (Claude Code): treat the Basecamp block as the visual centerpiece of this section. Larger type for "BASECAMP" label, two side-by-side demo cards below on desktop / stacked on mobile. Cards should have a hover state and a clear "walk through the demo →" affordance. Demo URLs are placeholders — wire up after Bidnam ships the demo branches. -->
-        <div class="built-featured" style="margin-top: var(--space-lg);">
-          <div class="built-featured__label" style="font-family: var(--font-mono); font-size: 0.85rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--red); margin-bottom: var(--space-sm);">Basecamp</div>
-          <h3 class="heading-md" style="font-family: var(--font-display); font-weight: 600; font-size: clamp(1.6rem, 2.6vw, 2.4rem); line-height: 1.15; max-width: 24ch;">A room-native AI workshop&nbsp;platform.</h3>
-          <p class="prose" style="margin-top: var(--space-sm); max-width: 56ch;">Replaces sticky notes and post-workshop deck-building with a system designed for the room&nbsp;itself.</p>
+        <div class="built-featured">
+          <div class="built-featured__label">Basecamp</div>
+          <h3 class="built-featured__heading">A room-native AI workshop&nbsp;platform.</h3>
+          <p class="built-featured__intro">Replaces sticky notes and post-workshop deck-building with a system designed for the room&nbsp;itself.</p>
 
-          <div class="built-featured__demos" style="margin-top: var(--space-md); display: grid; grid-template-columns: 1fr 1fr; gap: clamp(1.5rem, 3vw, 2.5rem);">
-            <a class="built-card built-card--featured" href="#" data-demo="tccc-la28" style="display: block; padding: clamp(1.5rem, 2.5vw, 2rem); border: 1px solid var(--rule); text-decoration: none;">
-              <div style="font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--dim);">Demo</div>
-              <h4 style="font-family: var(--font-display); font-weight: 600; font-size: 1.4rem; margin-top: 0.5rem;">TCCC &times; LA28&nbsp;Olympics</h4>
-              <p style="font-family: var(--font-body); font-size: 1.1rem; line-height: 1.5; margin-top: 0.75rem; color: var(--dim);">Built for The Coca-Cola Company's LA28 Olympic Big Bet sessions. ~80 participants across three days, four AI coaches grounded in each brand's strategic brief, a live executive handoff produced by Day&nbsp;3.</p>
-              <span style="display: inline-block; margin-top: 1rem; font-family: var(--font-mono); font-size: 0.85rem; color: var(--red);">Walk through the demo &rarr;</span>
+          <div class="built-featured__demos">
+            <!-- TODO: replace href="#" with the TCCC × LA28 demo URL once Bidnam ships the demo branch. -->
+            <a class="built-card built-card--featured" href="#" data-demo="tccc-la28">
+              <div class="built-card__eyebrow">Demo</div>
+              <h4 class="built-card__title">TCCC &times; LA28&nbsp;Olympics</h4>
+              <p class="built-card__body">Built for The Coca-Cola Company's LA28 Olympic Big Bet sessions. ~80 participants across three days, four AI coaches grounded in each brand's strategic brief, a live executive handoff produced by Day&nbsp;3.</p>
+              <span class="built-card__cta">Walk through the demo &rarr;</span>
             </a>
-            <a class="built-card built-card--featured" href="#" data-demo="sprite-nba" style="display: block; padding: clamp(1.5rem, 2.5vw, 2rem); border: 1px solid var(--rule); text-decoration: none;">
-              <div style="font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--dim);">Demo</div>
-              <h4 style="font-family: var(--font-display); font-weight: 600; font-size: 1.4rem; margin-top: 0.5rem;">Sprite &times;&nbsp;NBA</h4>
-              <p style="font-family: var(--font-body); font-size: 1.1rem; line-height: 1.5; margin-top: 0.75rem; color: var(--dim);">Re-skinned and re-tuned for Sprite's NBA partnership in Atlanta. Added live configurability&mdash;facilitators reshape idea fields, voting structures, and team setups in real time as the room&nbsp;evolves.</p>
-              <span style="display: inline-block; margin-top: 1rem; font-family: var(--font-mono); font-size: 0.85rem; color: var(--red);">Walk through the demo &rarr;</span>
+            <!-- TODO: replace href="#" with the Sprite × NBA demo URL once Bidnam ships the demo branch. -->
+            <a class="built-card built-card--featured" href="#" data-demo="sprite-nba">
+              <div class="built-card__eyebrow">Demo</div>
+              <h4 class="built-card__title">Sprite &times;&nbsp;NBA</h4>
+              <p class="built-card__body">Re-skinned and re-tuned for Sprite's NBA partnership in Atlanta. Added live configurability&mdash;facilitators reshape idea fields, voting structures, and team setups in real time as the room&nbsp;evolves.</p>
+              <span class="built-card__cta">Walk through the demo &rarr;</span>
             </a>
           </div>
         </div>
 
         <!-- ─── FROM THE ROOM — testimonials ─── -->
-        <!-- TODO (Claude Code): match the styling in the screenshot Fran provided. Italic Instrument Serif at large size, role/company in JetBrains Mono in red, thin red rule between each. Limit width to ~60ch for readability. -->
-        <div class="testimonials" style="margin-top: var(--space-lg); padding-top: var(--space-md); border-top: 1px solid var(--rule);">
-          <div class="testimonials__label" style="font-family: var(--font-mono); font-size: 0.85rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--red); margin-bottom: var(--space-md);">From the Room</div>
-          <figure class="testimonial" style="margin: 0 0 var(--space-md) 0;">
-            <blockquote style="font-family: var(--font-body); font-style: italic; font-size: clamp(1.4rem, 2.4vw, 2rem); line-height: 1.4; max-width: 60ch; margin: 0;">"The platform transformed how we ideate, validate and prioritise ideas. It was a real gamechanger&hellip; and has led directly to ideas we will take forward into our&nbsp;work."</blockquote>
-            <figcaption style="margin-top: 0.75rem; font-family: var(--font-mono); font-size: 0.85rem; letter-spacing: 0.12em; text-transform: uppercase;">
-              <span style="color: var(--red);">Global VP</span>
-              <span style="color: var(--dim); margin-left: 0.5rem;">Sprite</span>
+        <div class="testimonials">
+          <div class="testimonials__label">From the Room</div>
+          <figure class="testimonial">
+            <blockquote class="testimonial__quote">"The platform transformed how we ideate, validate and prioritise ideas. It was a real gamechanger&hellip; and has led directly to ideas we will take forward into our&nbsp;work."</blockquote>
+            <figcaption class="testimonial__attribution">
+              <span class="testimonial__role">Global VP</span><span class="testimonial__company">Sprite</span>
             </figcaption>
           </figure>
-          <figure class="testimonial" style="margin: 0 0 var(--space-md) 0;">
-            <blockquote style="font-family: var(--font-body); font-style: italic; font-size: clamp(1.4rem, 2.4vw, 2rem); line-height: 1.4; max-width: 60ch; margin: 0;">"It was sooooo good. Like beyond. We want to use it for&nbsp;everything."</blockquote>
-            <figcaption style="margin-top: 0.75rem; font-family: var(--font-mono); font-size: 0.85rem; letter-spacing: 0.12em; text-transform: uppercase;">
-              <span style="color: var(--red);">NA Head of Creative</span>
-              <span style="color: var(--dim); margin-left: 0.5rem;">Sprite, Fanta, and Sparkling Flavors</span>
+          <figure class="testimonial">
+            <blockquote class="testimonial__quote">"It was sooooo good. Like beyond. We want to use it for&nbsp;everything."</blockquote>
+            <figcaption class="testimonial__attribution">
+              <span class="testimonial__role">NA Head of Creative</span><span class="testimonial__company">Sprite, Fanta, and Sparkling Flavors</span>
             </figcaption>
           </figure>
-          <figure class="testimonial" style="margin: 0;">
-            <blockquote style="font-family: var(--font-body); font-style: italic; font-size: clamp(1.4rem, 2.4vw, 2rem); line-height: 1.4; max-width: 60ch; margin: 0;">"The tool helped us produce the best workshop I've&nbsp;done."</blockquote>
-            <figcaption style="margin-top: 0.75rem; font-family: var(--font-mono); font-size: 0.85rem; letter-spacing: 0.12em; text-transform: uppercase;">
-              <span style="color: var(--red);">Global Category Lead</span>
-              <span style="color: var(--dim); margin-left: 0.5rem;">Open X</span>
+          <figure class="testimonial">
+            <blockquote class="testimonial__quote">"The tool helped us produce the best workshop I've&nbsp;done."</blockquote>
+            <figcaption class="testimonial__attribution">
+              <span class="testimonial__role">Global Category Lead</span><span class="testimonial__company">Open X</span>
             </figcaption>
           </figure>
         </div>
@@ -1592,22 +1783,24 @@
         <p class="built-leadin">We start from problems, not products. The tools come after.</p>
 
         <!-- ─── SECONDARY ROW — Debrief, Promptuary, Network Slicing Arena ─── -->
-        <!-- TODO (Claude Code): three smaller cards in a row. Visually subordinate to the Basecamp block — smaller type, less padding, "Try it →" affordance. Stack on mobile. -->
-        <div class="built-secondary" style="margin-top: var(--space-lg); padding-top: var(--space-md); border-top: 1px solid var(--rule); display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(1rem, 2vw, 1.75rem);">
-          <a class="built-card built-card--secondary" href="#" data-tool="debrief" style="display: block; padding: clamp(1.25rem, 2vw, 1.5rem); border: 1px solid var(--rule); text-decoration: none;">
-            <h4 style="font-family: var(--font-display); font-weight: 600; font-size: 1.15rem;">Debrief</h4>
-            <p style="font-family: var(--font-body); font-size: 1rem; line-height: 1.5; margin-top: 0.5rem; color: var(--dim);">AI brief coaching. Sharpens creative briefs section by section through context-aware&nbsp;feedback.</p>
-            <span style="display: inline-block; margin-top: 0.75rem; font-family: var(--font-mono); font-size: 0.8rem; color: var(--red);">Try it &rarr;</span>
+        <div class="built-secondary">
+          <!-- TODO: replace href="#" with Debrief's live URL (Fran will provide). -->
+          <a class="built-card built-card--secondary" href="#" data-tool="debrief">
+            <h4 class="built-card__title">Debrief</h4>
+            <p class="built-card__body">AI brief coaching. Sharpens creative briefs section by section through context-aware&nbsp;feedback.</p>
+            <span class="built-card__cta">Try it &rarr;</span>
           </a>
-          <a class="built-card built-card--secondary" href="#" data-tool="promptuary" style="display: block; padding: clamp(1.25rem, 2vw, 1.5rem); border: 1px solid var(--rule); text-decoration: none;">
-            <h4 style="font-family: var(--font-display); font-weight: 600; font-size: 1.15rem;">Promptuary</h4>
-            <p style="font-family: var(--font-body); font-size: 1rem; line-height: 1.5; margin-top: 0.5rem; color: var(--dim);">Takes a rough AI query and sharpens it into a well-engineered prompt through a few targeted clarifying&nbsp;questions.</p>
-            <span style="display: inline-block; margin-top: 0.75rem; font-family: var(--font-mono); font-size: 0.8rem; color: var(--red);">Try it &rarr;</span>
+          <!-- TODO: replace href="#" with Promptuary's live URL (Fran will provide). -->
+          <a class="built-card built-card--secondary" href="#" data-tool="promptuary">
+            <h4 class="built-card__title">Promptuary</h4>
+            <p class="built-card__body">Takes a rough AI query and sharpens it into a well-engineered prompt through a few targeted clarifying&nbsp;questions.</p>
+            <span class="built-card__cta">Try it &rarr;</span>
           </a>
-          <a class="built-card built-card--secondary" href="#" data-tool="nsa" style="display: block; padding: clamp(1.25rem, 2vw, 1.5rem); border: 1px solid var(--rule); text-decoration: none;">
-            <h4 style="font-family: var(--font-display); font-weight: 600; font-size: 1.15rem;">Network Slicing&nbsp;Arena</h4>
-            <p style="font-family: var(--font-body); font-size: 1rem; line-height: 1.5; margin-top: 0.5rem; color: var(--dim);">A competitive simulation where strategists role-play brand decisions against real market rivals&mdash;grounded in actual research, with AI advisors pulling live intel. Less deck-building, more strategic&nbsp;reps.</p>
-            <span style="display: inline-block; margin-top: 0.75rem; font-family: var(--font-mono); font-size: 0.8rem; color: var(--red);">Try it &rarr;</span>
+          <!-- TODO: replace href="#" with Network Slicing Arena's live URL (Fran will provide). -->
+          <a class="built-card built-card--secondary" href="#" data-tool="nsa">
+            <h4 class="built-card__title">Network Slicing&nbsp;Arena</h4>
+            <p class="built-card__body">A competitive simulation where strategists role-play brand decisions against real market rivals&mdash;grounded in actual research, with AI advisors pulling live intel. Less deck-building, more strategic&nbsp;reps.</p>
+            <span class="built-card__cta">Try it &rarr;</span>
           </a>
         </div>
       </div>
