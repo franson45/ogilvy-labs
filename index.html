@@ -726,6 +726,19 @@
       color: var(--orange);
     }
 
+    /* ─── 02: What We've Built — editorial lead-in line between Basecamp and secondary tools ─── */
+    .built-leadin {
+      font-family: var(--font-body);
+      font-style: italic;
+      font-size: clamp(1.7rem, 3vw, 2.6rem);
+      line-height: 1.35;
+      color: var(--off-white);
+      max-width: 26ch;
+      margin: clamp(4rem, 7vw, 6.5rem) auto;
+      text-align: center;
+      text-wrap: balance;
+    }
+
     /* ─── 03: What We Build (Taxonomy) ─── */
     .taxonomy-intro {
       margin-bottom: var(--space-sm);
@@ -1575,6 +1588,9 @@
           </figure>
         </div>
 
+        <!-- ─── EDITORIAL PAUSE — anti-typecasting line that bridges Basecamp into the secondary row ─── -->
+        <p class="built-leadin">We start from problems, not products. The tools come after.</p>
+
         <!-- ─── SECONDARY ROW — Debrief, Promptuary, Network Slicing Arena ─── -->
         <!-- TODO (Claude Code): three smaller cards in a row. Visually subordinate to the Basecamp block — smaller type, less padding, "Try it →" affordance. Stack on mobile. -->
         <div class="built-secondary" style="margin-top: var(--space-lg); padding-top: var(--space-md); border-top: 1px solid var(--rule); display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(1rem, 2vw, 1.75rem);">
@@ -1609,6 +1625,9 @@
         </div>
         <div class="prose" style="margin-top: var(--space-md); border-left: 2px solid var(--red); padding-left: clamp(1.2rem, 2vw, 2rem);">
           <p>Our work has always been about creating forward&mdash;brand futures, new market positions, paths that didn't exist before the engagement started.</p>
+        </div>
+        <div class="prose" style="margin-top: var(--space-md);">
+          <p>Done well, these tools stretch what teams can think about, not just what they can produce. <em>That's the&nbsp;bar.</em></p>
         </div>
         <div class="prose" style="margin-top: var(--space-md);">
           <p>What's new is that the thinking can now take a form that stays with the work. Not as reference material, but as something teams can actually use in the moment&mdash;pulling in context from earlier, building on what's happening live, keeping focus in one place. <em>Ogilvy Labs is how we figure out what those forms look&nbsp;like.</em></p>
