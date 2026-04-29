@@ -81,16 +81,22 @@
     /* ─── Custom Cursor ─── */
     @media (hover: hover) { * { cursor: none !important; } }
 
+    /* Cursor uses mix-blend-mode: difference so it auto-inverts across the
+       white→dark cut. White element + difference = black on white bg, white
+       on dark bg. Hover state opts out and uses a fixed red, which reads on
+       both backgrounds without producing the cyan inversion artifact that
+       red+difference would yield on the white sticky header. */
     .cursor-dot {
       position: fixed;
       top: 0; left: 0;
       width: 6px; height: 6px;
-      background: var(--ink);
+      background: #FFFFFF;
       border-radius: 50%;
       pointer-events: none;
       z-index: 10000;
       transform: translate(-50%, -50%);
       opacity: 0;
+      mix-blend-mode: difference;
       transition: opacity 0.3s ease;
     }
 
@@ -98,18 +104,20 @@
       position: fixed;
       top: 0; left: 0;
       width: 36px; height: 36px;
-      border: 1.5px solid rgba(26, 26, 26, 0.25);
+      border: 1.5px solid rgba(255, 255, 255, 0.55);
       border-radius: 50%;
       pointer-events: none;
       z-index: 10000;
       transform: translate(-50%, -50%);
       opacity: 0;
-      transition: width 0.3s ease, height 0.3s ease, border-color 0.3s ease, opacity 0.3s ease;
+      mix-blend-mode: difference;
+      transition: width 0.3s ease, height 0.3s ease, border-color 0.3s ease, opacity 0.3s ease, mix-blend-mode 0s;
     }
 
     .cursor-ring.hover {
       width: 52px; height: 52px;
-      border-color: var(--orange);
+      border-color: var(--red);
+      mix-blend-mode: normal;
     }
 
     .cursor-visible .cursor-dot,
@@ -911,7 +919,7 @@
     }
 
     .built-card--secondary {
-      padding: clamp(1.1rem, 1.8vw, 1.4rem);
+      padding: clamp(1.4rem, 2.2vw, 1.8rem);
       border: 1px solid rgba(245, 240, 234, 0.1);
       border-radius: 4px;
     }
@@ -919,6 +927,32 @@
     .built-card--secondary:hover {
       border-color: rgba(235, 63, 67, 0.6);
       background: rgba(235, 63, 67, 0.03);
+    }
+
+    /* Provenance — the "problem" half of each card; italic display Serif sits
+       above a thin red rule that pairs it with the tool name (the "answer" half). */
+    .built-card__provenance {
+      font-family: var(--font-body);
+      font-style: italic;
+      font-size: clamp(1.05rem, 1.3vw, 1.25rem);
+      line-height: 1.45;
+      color: var(--off-white);
+      margin: 0 0 1rem 0;
+      text-wrap: pretty;
+    }
+
+    .built-card__divider {
+      border: none;
+      border-top: 1px solid var(--red);
+      opacity: 0.55;
+      width: 32px;
+      margin: 0 0 1rem 0;
+      transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+    }
+
+    .built-card--secondary:hover .built-card__divider {
+      width: 56px;
+      opacity: 0.85;
     }
 
     .built-card--secondary .built-card__title {
@@ -933,7 +967,7 @@
     }
 
     .built-card--secondary .built-card__cta {
-      padding-top: 0.85rem;
+      padding-top: 1rem;
       font-size: 0.7rem;
     }
 
@@ -1227,49 +1261,7 @@
       text-wrap: pretty;
     }
 
-    /* ─── 07: What's Next — quiet rotating ticker, one line at a time, crossfade ─── */
-    .next-list {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-      position: relative;
-      min-height: clamp(7rem, 16vh, 11rem);
-      max-width: 36ch;
-    }
-
-    .next-item {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      font-family: var(--font-body);
-      font-style: italic;
-      font-size: clamp(1.7rem, 3vw, 2.6rem);
-      line-height: 1.35;
-      color: var(--off-white);
-      opacity: 0;
-      transform: translateY(0.6rem);
-      transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
-      pointer-events: none;
-      text-wrap: balance;
-    }
-
-    .next-item.is-active {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .next-list::after {
-      content: '';
-      display: block;
-      width: 24px;
-      height: 2px;
-      background: var(--red);
-      opacity: 0.5;
-      margin-top: clamp(1.5rem, 3vw, 2.5rem);
-    }
-
-    /* ─── 08: Get in Touch ─── */
+    /* ─── 07: Get in Touch ─── */
     .contact-list {
       list-style: none;
       padding: 0;
@@ -1820,8 +1812,7 @@
         <a class="nav-item" href="#sec-stack" data-section="sec-stack"><span class="nav-item__num">04</span><span class="nav-item__label">Taxonomy</span></a>
         <a class="nav-item" href="#sec-how" data-section="sec-how"><span class="nav-item__num">05</span><span class="nav-item__label">How</span></a>
         <a class="nav-item" href="#sec-questions" data-section="sec-questions"><span class="nav-item__num">06</span><span class="nav-item__label">Questions</span></a>
-        <a class="nav-item" href="#sec-next" data-section="sec-next"><span class="nav-item__num">07</span><span class="nav-item__label">Next</span></a>
-        <a class="nav-item" href="#sec-contact" data-section="sec-contact"><span class="nav-item__num">08</span><span class="nav-item__label">Contact</span></a>
+        <a class="nav-item" href="#sec-contact" data-section="sec-contact"><span class="nav-item__num">07</span><span class="nav-item__label">Contact</span></a>
       </div>
     </nav>
     <div class="nav-progress" id="navProgress"></div>
@@ -1924,18 +1915,24 @@
         <div class="built-secondary">
           <!-- TODO: replace href="#" with Debrief's live URL (Fran will provide). -->
           <a class="built-card built-card--secondary" href="#" data-tool="debrief">
+            <p class="built-card__provenance">The brief should be the start of the work. Most of the time it's the start of a different&nbsp;conversation.</p>
+            <hr class="built-card__divider" aria-hidden="true">
             <h4 class="built-card__title">Debrief</h4>
             <p class="built-card__body">AI brief coaching. Sharpens creative briefs section by section through context-aware&nbsp;feedback.</p>
             <span class="built-card__cta">Try it &rarr;</span>
           </a>
           <!-- TODO: replace href="#" with Promptuary's live URL (Fran will provide). -->
           <a class="built-card built-card--secondary" href="#" data-tool="promptuary">
+            <p class="built-card__provenance">AI is supposedly making everyone faster. Why does asking it the right thing still take ten&nbsp;tries?</p>
+            <hr class="built-card__divider" aria-hidden="true">
             <h4 class="built-card__title">Promptuary</h4>
             <p class="built-card__body">Takes a rough AI query and sharpens it into a well-engineered prompt through a few targeted clarifying&nbsp;questions.</p>
             <span class="built-card__cta">Try it &rarr;</span>
           </a>
           <!-- TODO: replace href="#" with Network Slicing Arena's live URL (Fran will provide). -->
           <a class="built-card built-card--secondary" href="#" data-tool="nsa">
+            <p class="built-card__provenance">We make competitive decisions every day. We almost never get to practice making&nbsp;them.</p>
+            <hr class="built-card__divider" aria-hidden="true">
             <h4 class="built-card__title">Network Slicing&nbsp;Arena</h4>
             <p class="built-card__body">A competitive simulation where strategists role-play brand decisions against real market rivals&mdash;grounded in actual research, with AI advisors pulling live intel. Less deck-building, more strategic&nbsp;reps.</p>
             <span class="built-card__cta">Try it &rarr;</span>
@@ -2024,8 +2021,8 @@
     <!-- ━━━ 06 — THREE QUESTIONS ━━━ -->
     <section class="section section--dark" id="sec-questions" data-bg-number="06">
       <div class="section__inner">
-        <div class="section-label">06 — Before working with us</div>
-        <h2 class="heading-lg" style="margin-bottom: var(--space-md);">Three questions to think&nbsp;about.</h2>
+        <div class="section-label">06 — Questions to consider</div>
+        <h2 class="heading-lg" style="margin-bottom: var(--space-md);">Three questions to think about as you reach&nbsp;out.</h2>
         <!-- TODO (Claude Code): style this list. Treat each Q as a numbered item with the question in the same family as the principles list — large display type, generous spacing, optional hover/active state. Keep the editorial restraint. -->
         <ol class="questions-list">
           <li class="question">
@@ -2044,25 +2041,10 @@
       </div>
     </section>
 
-    <!-- ━━━ 07 — WHAT'S NEXT ━━━ -->
-    <section class="section section--dark" id="sec-next" data-bg-number="07">
+    <!-- ━━━ 07 — GET IN TOUCH ━━━ -->
+    <section class="section section--dark" id="sec-contact" data-bg-number="07">
       <div class="section__inner">
-        <div class="section-label">07 — What's next</div>
-        <h2 class="heading-lg" style="margin-bottom: var(--space-md);">What's&nbsp;next.</h2>
-        <ul class="next-list" data-rotate="true" aria-label="What's next, rotating">
-          <li class="next-item">Audience intelligence as living&nbsp;data</li>
-          <li class="next-item">Strategy as&nbsp;simulation</li>
-          <li class="next-item">Diagnostic tools for&nbsp;strategists</li>
-          <li class="next-item">Configurable systems for live&nbsp;workshops</li>
-          <li class="next-item">Building alongside&nbsp;teams</li>
-        </ul>
-      </div>
-    </section>
-
-    <!-- ━━━ 08 — GET IN TOUCH ━━━ -->
-    <section class="section section--dark" id="sec-contact" data-bg-number="08">
-      <div class="section__inner">
-        <div class="section-label">08 — Get in touch</div>
+        <div class="section-label">07 — Get in touch</div>
         <h2 class="heading-lg" style="margin-bottom: var(--space-md);">Get in&nbsp;touch.</h2>
         <p class="prose" style="max-width: 56ch; margin-bottom: var(--space-md);">If you've got a moment of friction worth solving or a tool here you want to understand better&mdash;we'd like to hear about&nbsp;it.</p>
         <ul class="contact-list">
@@ -2379,7 +2361,7 @@
     window.addEventListener('scroll', updatePresenterNav, { passive: true });
 
     // ─── Section Navigation ───
-    const sectionIds = ['sec-what','sec-built','sec-why','sec-stack','sec-how','sec-questions','sec-next','sec-contact'];
+    const sectionIds = ['sec-what','sec-built','sec-why','sec-stack','sec-how','sec-questions','sec-contact'];
 
     function getCurrentSectionIndex() {
       const threshold = window.innerHeight * 0.5;
@@ -2419,9 +2401,9 @@
       // Ignore if user is typing in an input
       if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.isContentEditable) return;
 
-      // Keys 1-8 → numbered sections
-      const numberedSections = ['sec-what','sec-built','sec-why','sec-stack','sec-how','sec-questions','sec-next','sec-contact'];
-      if (e.key >= '1' && e.key <= '8') {
+      // Keys 1-7 → numbered sections
+      const numberedSections = ['sec-what','sec-built','sec-why','sec-stack','sec-how','sec-questions','sec-contact'];
+      if (e.key >= '1' && e.key <= '7') {
         e.preventDefault();
         const idx = parseInt(e.key) - 1;
         const target = document.getElementById(numberedSections[idx]);
@@ -2625,30 +2607,6 @@
         renderDetail();
       }
     });
-
-    // ─── 'What's next' rotating ticker ───
-    // Crossfades one item at a time, ~4.5s hold, pauses on hover so a reader who
-    // looks closer can finish the line they're on without it changing under them.
-    (() => {
-      const list = document.querySelector('.next-list[data-rotate="true"]');
-      if (!list) return;
-      const items = Array.from(list.querySelectorAll('.next-item'));
-      if (items.length < 2) {
-        items.forEach(el => el.classList.add('is-active'));
-        return;
-      }
-      let idx = 0;
-      let paused = false;
-      items[0].classList.add('is-active');
-      setInterval(() => {
-        if (paused) return;
-        items[idx].classList.remove('is-active');
-        idx = (idx + 1) % items.length;
-        items[idx].classList.add('is-active');
-      }, 4500);
-      list.addEventListener('mouseenter', () => { paused = true; });
-      list.addEventListener('mouseleave', () => { paused = false; });
-    })();
 
     // ─── Resize ───
     function onResize() {
