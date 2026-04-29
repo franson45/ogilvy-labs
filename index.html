@@ -249,11 +249,13 @@
       border-bottom-color: rgba(255, 255, 255, 0.06);
     }
 
-    /* Brand / Home button */
+    /* Brand / Home button — Ogilvy [flask] Labs reads as a single wordmark, so
+       the flask gap is tighter than a normal flex gap (it's an inter-letter space,
+       not an icon-to-text margin). */
     .sticky-header__brand {
       display: flex;
       align-items: center;
-      gap: 0.5rem;
+      gap: clamp(0.3rem, 0.55vw, 0.45rem);
       flex-shrink: 0;
       padding-right: clamp(1rem, 2vw, 1.75rem);
       border-right: 1px solid rgba(0, 0, 0, 0.08);
@@ -267,14 +269,23 @@
       border-right-color: rgba(255, 255, 255, 0.08);
     }
 
+    /* Flask sits between "Ogilvy" and "Labs" as a structural centerpiece.
+       viewBox is cropped tight to the art bounds (2 1 20 29 ≈ 2:3 aspect).
+       width:height matches the aspect so meet/slice doesn't add internal
+       letterboxing. The translateY pulls the bowl's optical center up to
+       align with the text caps — without it, the visual weight (the wide
+       bowl at the bottom of the flask) reads ~3px below the typographic
+       midline. Hover scale stays gentle. */
     .sticky-header__flask {
-      width: 18px; height: 18px;
+      width: 14px;
+      height: 21px;
       flex-shrink: 0;
+      transform: translateY(-1.5px);
       transition: transform 0.3s ease;
     }
 
     .sticky-header__brand:hover .sticky-header__flask {
-      transform: scale(1.1);
+      transform: translateY(-1.5px) scale(1.08);
     }
 
     .sticky-header__text {
@@ -1796,13 +1807,14 @@
 
   <!-- Presenter Nav Header -->
   <header class="sticky-header" id="stickyHeader">
-    <a class="sticky-header__brand" id="navHome" href="#" aria-label="Return to hero">
-      <svg class="sticky-header__flask" viewBox="0 0 24 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <a class="sticky-header__brand" id="navHome" href="#" aria-label="Return to hero — Ogilvy Labs">
+      <span class="sticky-header__text">Ogilvy</span>
+      <svg class="sticky-header__flask" viewBox="2 1 20 29" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
         <path d="M10 2h4v10l7 14a2 2 0 01-1.8 3H4.8a2 2 0 01-1.8-3l7-14V2z" stroke="#1A1A1A" stroke-width="1.5" fill="none"/>
         <path d="M10 2h4" stroke="#1A1A1A" stroke-width="2" stroke-linecap="round"/>
-        <path d="M6.5 22l3.5-7h4l3.5 7a1 1 0 01-.9 1.5H7.4a1 1 0 01-.9-1.5z" fill="#EB3F43" opacity="0.8"/>
+        <path d="M6.5 22l3.5-7h4l3.5 7a1 1 0 01-.9 1.5H7.4a1 1 0 01-.9-1.5z" fill="#EB3F43" opacity="0.85"/>
       </svg>
-      <span class="sticky-header__text">Ogilvy Labs</span>
+      <span class="sticky-header__text">Labs</span>
     </a>
     <nav class="nav-groups" id="navGroups" aria-label="Section navigation">
       <div class="nav-group">
